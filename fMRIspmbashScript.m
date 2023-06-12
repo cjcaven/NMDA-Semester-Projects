@@ -28,21 +28,33 @@ meanfuncimg = dir('m*.img');
 disp('PREPROCESSING')
 disp('================================================================')
 
-preproc_data = spm_preprocessing(funcimg, anatimg, spmdir);
+preprocessing_steps = input('Choose your preprocessing steps: ');
 
-% check coregistration and segmentation 
+for i = 1:length(preprocessing_steps)
+   
+    switch i
+
+        case 1
+            realign_estimate(funcimg)
+
+        case 2
+            coregistration(meanfuncimg, anatim)
+
+        case 3
+            segment(anatimg, spmdir)
+
+        case 4
+            normalization
+
+        case 5
+            smoothing
+
+ disp('PREPROCESSING DONE!')
+ disp('================================================================')
+
+    end
+end
 
 spm_check_registration()
-disp('PREPROCESSING DONE!')
-disp('================================================================')
-
-
-%% 
-
-
-
-
-
-
 
 
