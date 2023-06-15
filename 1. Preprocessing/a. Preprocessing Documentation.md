@@ -7,3 +7,12 @@ If the scans are not realigned, strong signal changes can be artificially induce
 _*Keep in mind that strong artifacts (interpolation effects) along the edges of tissue can indicate lower-quality data, even after performing realignment._
 
 To correct for motion, realignment relies on the brightness differences between single images (volumes). An algorithm uses the shape of the head to infer the likely rotation activity of the head, based on what activity minimizes the brightness differences. This results in a Motion Parameter. The Motion Parameter can then be used to interpolate and adjust (reslice) the images.
+
+### Step 2: Coregistration
+Since the functional images are not in the same space as the structural images, the images should be coregistered to the same space. You can specify a coregistration job in the SPM batch editor. You can use the mean fMRI scan from the realignment as a reference image, and set the structural image as the source image. 
+
+### Step 3: Normalization
+To account for variability within the individual anatomy of multiple participants, all individual brains should be transformed to a standard space. 
+
+### Step 4: Segmentation
+
