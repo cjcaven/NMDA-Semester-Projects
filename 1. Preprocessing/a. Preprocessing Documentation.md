@@ -9,10 +9,10 @@ _*Keep in mind that strong artifacts (interpolation effects) along the edges of 
 To correct for motion, realignment relies on the brightness differences between single images (volumes). An algorithm uses the shape of the head to infer the likely rotation activity of the head, based on what activity minimizes the brightness differences. This results in a Motion Parameter. The Motion Parameter can then be used to interpolate and adjust (reslice) the images.
 
 ### Step 2: Coregistration
-Since the functional images are not in the same space as the structural images, the images should be coregistered to the same space. You can specify a coregistration job in the SPM batch editor. You can use the mean fMRI scan from the realignment as a reference image, and set the structural image as the source image. 
+Since the functional images are not in the same space as the structural images, the images should be "coregistered" to the same space. You can specify a coregistration job in the SPM batch editor. You can use the mean fMRI scan from the realignment as a reference image, and set the structural image as the source image. 
 
 ### Step 3: Normalization
-To account for variability within the individual anatomy of multiple participants, all individual brains should be transformed to a standard space. 
+To account for variability within the individual anatomy of multiple participants, all individual brains should be transformed to a standard space. This can be done by segmentation or warping. For this project, we used segmentation, which takes the brightness differences in T1 images (and probability maps) to segment the brain into gray and white matter maps. 
 
-### Step 4: Segmentation
-
+### Step 4: Smoothing
+Even after transforming the different participant brains into one standard space, there are still some inter-individual spatial differences. Therefore, the data should be smoothed with a 3D Gaussian Full-Width-Half-Max (FWHM) Kernel. The smoothing process eliminates small outliers, particularly individual voxels with extremely high values. It is also important to know that the significant threshold used in any subsequent tests will be affected by the smoothing of the data.
